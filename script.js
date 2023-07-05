@@ -7,18 +7,21 @@ const loader = document.getElementById('loader');
 
 let apiQuotes = [];
 
-function loading() {
+function showLoadingSpinner() {
     loader.hidden = false;
     quoteContainer.hidden = true;
 }
 
-function complete() {
-    loader.hidden = true;
-    quoteContainer.hidden = false;
+function removeLoadingSpinner() {
+    if (!loader.hidden) {
+        quoteContainer.hidden = false;
+        loader.hidden = true;
+    }
+
 }
 
 function newQuote() {
-    loading();
+    showLoadingSpinner();
     const quote = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
 
     if (!quote.author) {
@@ -34,11 +37,11 @@ function newQuote() {
     }
 
     quoteText.textContent = quote.text;
-    complete();
+    removeLoadingSpinner();
 }
 
 async function getQuotes() {
-    loading();
+    showLoadingSpinner();
     const apiUrl = 'https://jacintodesign.github.io/quotes-api/data/quotes.json';
     try {
         const response = await fetch(apiUrl);
@@ -51,7 +54,7 @@ async function getQuotes() {
 
 
 function tweetQuote() {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.textContent} - ${author.textContent}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${quoteText.innerText} - ${author.innerText}`;
     window.open(twitterUrl, '_blank');
 }
 
