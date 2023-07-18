@@ -1,4 +1,4 @@
 # QuoteGenerator
 
 ## Github page : 
-https://almirdautovic.github.io/QuoteGenerator/
+https://almirdautovic.github.io/RandomQuoteGenerator/
